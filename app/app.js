@@ -13,9 +13,16 @@ function fetchUser(e) {
 
   if (inputValue) {
     github.getUser(inputValue)
-      .then(data => ui.showProfile(data))
+      .then(data => {
+        if (data.message !== "Not Found") {
+          ui.showProfile(data)
+          console.log(data)
+        } else {
+          ui.showNotFound(inputValue)
+        }
+      })
   } else {
-    alert('Enter a user...')
+    ui.showError()
   }
 }
 
